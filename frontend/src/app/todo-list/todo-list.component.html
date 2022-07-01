@@ -1,0 +1,33 @@
+
+<h2 *ngIf="itemList.length==0">Lista este goala</h2>
+<div>  
+    <ul class="list-group">   
+        <li class="list-group-item" *ngFor="let item of itemList.reverse()">
+            <div>
+              <span> {{item['name']}}</span>
+            </div>
+            <button class="input-group-text ml-auto mr-1" type="button" (click)="triggerModal(modalData)" (click)="call(item)">Edit</button>
+            <button class="input-group-text" (click)="onClickDelete(item)">Delete</button> 
+            
+        </li>  
+    </ul>
+    <button *ngIf="itemList.length>0" class="input-group-text ml-auto mt-3 mr-3" (click)="onClickDeleteAll()">Delete All</button> 
+</div>
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Task</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">x</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group p-4">
+        <input type="text" class="form-control" placeholder="Enter Task " name="task" [(ngModel)]="editItemValue">
+        <button class="btn btn-outline-success" type="button" (click)="onClickUpdate()" (click)="modal.close('Update click')" >Update</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
